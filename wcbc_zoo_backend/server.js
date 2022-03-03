@@ -1,17 +1,16 @@
-'use strict';
+var express = require('express');
+var mysql = require('./dbcon.js')
+var bodyParser = require("body-parser")
 
-import exhibits from './db/exhibit_methods.js'
 
-const express = require('express');
-const app = express();
-const PORT = 22131;
-const mysql = require('./dbcon.js')
+var app = express();
+var PORT = 22131;
 
-const db = createPool({
-  host
-})
-
-app.use(exhibits)
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.json());
+app.set("port", PORT);
+app.set("mysql", mysql);
+app.use("/Exhibits", require("./exhibit_methods"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
