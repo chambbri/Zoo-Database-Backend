@@ -3,7 +3,7 @@ module.exports = (function () {
     var router = express.Router();
 
     function loadExhibits(res, mysql, context, complete) {
-        mysql.pool.query("SELECT type, size, animal_capacity FROM Exhbits",
+        mysql.pool.query("SELECT exhibit_id, type, size, animal_capacity FROM Exhibits",
         function (err, results, fields) {
             if (err) {
                 res.write(JSON.stringify(error));
@@ -14,10 +14,10 @@ module.exports = (function () {
         })
     };
     
-    router.get("/", function (req, res) {
+    router.get("/Exhibits", function (req, res) {
         var callbackCount = 0
         var context = {}
-        var mysql = req.app.get("mysql")
+        var mysql = req.app.get('mysql');
         loadExhibits(res, mysql, context, complete);
         function complete() {
             callbackCount++;
@@ -30,7 +30,7 @@ module.exports = (function () {
     router.post('/add', function (req, res) {
         console.log(req.body);
         var mysql = req.app.get("mysql");
-        const exhibitInsert = "INSERT INTO Exhibits (type, size, animal_capacity) VALUES (?, ?, ?, ?)";
+        const exhibitInsert = "INSERT INTO Exhibits (type, size, animal_capacity) VALUES (?, ?, ?)";
         mysql.pool.query(
             exhibitInsert,
             [req.body.type, req.body.size, req.body.animal_capacity],
@@ -40,10 +40,10 @@ module.exports = (function () {
                     res.send(err);
                 }
                 if (result) {
-                    res.redirect('/')
+                    res.send(result);
                 }
                 if (fields) {
-                    res.redirect('/')
+                    res.send(fields);
                 }
             }
         )

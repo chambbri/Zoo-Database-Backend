@@ -23,7 +23,7 @@ CREATE TABLE Animals (
     birthdate DATE NOT NULL,
     gender VARCHAR(10) NOT NULL,
     PRIMARY KEY(animal_id),
-    FOREIGN KEY(exhibit_id) REFERENCES exhibits(exhibit_id)
+    FOREIGN KEY (exhibit_id) REFERENCES Exhibits(exhibit_id)
  ) engine=innodb;
 
 /* CREATE EMPLOYEES TABLE */
@@ -45,17 +45,17 @@ CREATE TABLE Animal_Services (
     time TIME NOT NULL,
     type_of_care VARCHAR(255) NOT NULL,
     PRIMARY KEY(animal_services_id),
-    FOREIGN KEY(animal_id) REFERENCES animal(animal_id)
+    FOREIGN KEY(animal_id) REFERENCES Animals(animal_id)
  ) engine=innodb;
 
 /* CREATE ANIMAL_EMPLOYEE_SERVICES TABLE */
 CREATE TABLE Animal_Employee_Services (
-    animal_services_id INT(11) NOT NULL
+    animal_services_id INT(11) NOT NULL,
     employee_id INT(11) NOT NULL,
     PRIMARY KEY (animal_services_id, employee_id),
-    FOREIGN KEY(animal_services_id) REFERENCES animal_services(animal_services_id)
+    FOREIGN KEY(animal_services_id) REFERENCES Animal_Services(animal_services_id)
     ON DELETE CASCADE,
-    FOREIGN KEY(employee_id) REFERENCES employees(employee_id)
+    FOREIGN KEY(employee_id) REFERENCES Employees(employee_id)
     ON DELETE CASCADE
  ) engine=innodb;
 
