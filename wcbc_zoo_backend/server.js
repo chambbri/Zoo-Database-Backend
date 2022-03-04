@@ -59,6 +59,17 @@ app.get("/animalemployeeservices", (req, res) => {
   });
 });
 
+//Insert an exhibit
+app.post("/exhibits", (req, res) => {
+  const type = req.body.type;
+  const size = req.body.size;
+  const animal_capacity = req.body.animal_capacity;
+  const insertExhibits = "INSERT INTO Exhibits (type, size, animal_capacity) VALUES (?, ?, ?)";
+  mysql.pool.query(insertExhibits, [type, size, animal_capacity], (err, result) => {
+    console.log(result);
+  });
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
