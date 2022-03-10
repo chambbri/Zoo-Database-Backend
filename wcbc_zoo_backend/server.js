@@ -89,7 +89,7 @@ app.post("/employees", (req, res) => {
   const lname = req.body.lname;
   const phone = req.body.phone;
   const email = req.body.email;
-  const job_title = req.body.job_title
+  const job_title = req.body.job_title;
   const insertEmployees = "INSERT INTO Employees (fname, lname, phone, email, job_title) VALUES (?, ?, ?, ?, ?)";
   mysql.pool.query(insertEmployees, [fname, lname, phone, email, job_title], (err, result) => {
     console.log(err);
@@ -117,6 +117,42 @@ app.post("/animalemployeeservices", (req, res) => {
     console.log(err);
   });
 });
+
+//Delete an exhibit
+app.delete("/exhibits/:exhibit_id", (req, res)=> {
+  const exhibit_id = req.params.exhibit_id;
+  const deleteExhibit = "DELETE FROM Exhibits WHERE exhibit_id = ?";
+  mysql.pool.query(deleteExhibit, exhibit_id, (err, result) => {
+    console.log(err)
+  })
+})
+
+//Delete an animal
+app.delete("/animals/:animal_id", (req, res)=> {
+  const animal_id = req.params.animal_id;
+  const deleteAnimal = "DELETE FROM Animals WHERE animal_id = ?";
+  mysql.pool.query(deleteAnimal, animal_id, (err, result) => {
+    console.log(err)
+  })
+})
+
+//Delete an employee
+app.delete("/employees/:employee_id", (req, res)=> {
+  const employee_id = req.params.employee_id;
+  const deleteEmployee = "DELETE FROM Employees WHERE employee_id = ?";
+  mysql.pool.query(deleteEmployee, employee_id, (err, result) => {
+    console.log(err)
+  })
+})
+
+//Delete an animal service
+app.delete("/animalservices/:animal_services_id", (req, res)=> {
+  const animal_services_id = req.params.animal_services_id;
+  const deleteAnimalService = "DELETE FROM Animal_Services WHERE animal_services_id = ?";
+  mysql.pool.query(deleteAnimalService, animal_services_id, (err, result) => {
+    console.log(err)
+  })
+})
 
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
