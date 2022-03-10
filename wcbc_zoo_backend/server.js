@@ -66,7 +66,55 @@ app.post("/exhibits", (req, res) => {
   const animal_capacity = req.body.animal_capacity;
   const insertExhibits = "INSERT INTO Exhibits (type, size, animal_capacity) VALUES (?, ?, ?)";
   mysql.pool.query(insertExhibits, [type, size, animal_capacity], (err, result) => {
-    console.log(result);
+    console.log(err);
+  });
+});
+
+//Insert an animal
+app.post("/animals", (req, res) => {
+  const exhibit_id = req.body.exhibit_id;
+  const animal_type = req.body.animal_type;
+  const origin_country = req.body.origin_country;
+  const birthdate = req.body.birthdate;
+  const gender = req.body.gender;
+  const insertAnimals = "INSERT INTO Animals (exhibit_id, animal_type, origin_country, birthdate, gender) VALUES (?, ?, ?, ?, ?)";
+  mysql.pool.query(insertAnimals, [exhibit_id, animal_type, origin_country, birthdate, gender], (err, result) => {
+    console.log(err);
+  });
+});
+
+//Insert employees
+app.post("/employees", (req, res) => {
+  const fname = req.body.fname;
+  const lname = req.body.lname;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const job_title = req.body.job_title
+  const insertEmployees = "INSERT INTO Employees (fname, lname, phone, email, job_title) VALUES (?, ?, ?, ?, ?)";
+  mysql.pool.query(insertEmployees, [fname, lname, phone, email, job_title], (err, result) => {
+    console.log(err);
+  });
+});
+
+//Insert animal services
+app.post("/animalservices", (req, res) => {
+  const animal_id = req.body.animal_id;
+  const date = req.body.date;
+  const time = req.body.time;
+  const type_of_care = req.body.type_of_care;
+  const insertAnimalServices = "INSERT INTO Animal_Services (animal_id, date, time, type_of_care) VALUES (?, ?, ?, ?)";
+  mysql.pool.query(insertAnimalServices, [animal_id, date, time, type_of_care], (err, result) => {
+    console.log(err);
+  });
+});
+
+//Insert animal employee services
+app.post("/animalemployeeservices", (req, res) => {
+  const animal_services_id = req.body.animal_services_id;
+  const employee_id = req.body.employee_id;
+  const insertAnimalEmployeeServices = "INSERT INTO Animal_Employee_Services (animal_services_id, employee_id) VALUES (?, ?)";
+  mysql.pool.query(insertAnimalEmployeeServices, [animal_services_id, employee_id], (err, result) => {
+    console.log(err);
   });
 });
 
