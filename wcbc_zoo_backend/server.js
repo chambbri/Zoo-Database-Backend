@@ -154,6 +154,15 @@ app.delete("/animalservices/:animal_services_id", (req, res)=> {
   })
 })
 
+//Delete an animal employee service
+app.delete("/animalemployeeservices/:animal_services_id", (req, res)=> {
+  const animal_services_id = req.params.animal_services_id;
+  const deleteAnimalEmployeeService = "DELETE FROM Animal_Employee_Services WHERE animal_services_id = ?";
+  mysql.pool.query(deleteAnimalEmployeeService, animal_services_id, (err, result) => {
+    console.log(err)
+  })
+})
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
