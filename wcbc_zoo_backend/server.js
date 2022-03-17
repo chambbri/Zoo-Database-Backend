@@ -193,7 +193,7 @@ app.put("/animals/:animal_id", (req, res) => {
   const origin_country = req.body.origin_country;
   const birthdate = req.body.birthdate;
   const gender = req.body.gender;
-  const updateAnimal = "UPDATE Animlas SET exhibit_id = ?, animal_type = ?, origin_country = ?, birthdate = ?, gender = ? WHERE animal_id = ?";
+  const updateAnimal = "UPDATE Animals SET exhibit_id = ?, animal_type = ?, origin_country = ?, birthdate = ?, gender = ? WHERE animal_id = ?";
   mysql.pool.query(updateAnimal, [exhibit_id, animal_type, origin_country, birthdate, gender, animal_id], (err, result) => {
     console.log(err)
   })
