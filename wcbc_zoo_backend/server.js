@@ -37,11 +37,12 @@ app.get("/animals", (req, res) => {
 
 //Search for an animal
 app.get("/animals/:animal_type", (req, res) => {
+  const animal_type_search = req.params.animal_type;
   const selectAnimal = "SELECT animal_id, exhibit_id, animal_type, origin_country, birthdate, gender FROM Animals WHERE animal_type = ?"
-  mysql.pool.query(selectAnimal, (err, result) => {
+  mysql.pool.query(selectAnimal, animal_type_search, (err, result) => {
     res.send(result);
-  }
-})
+  });
+});
 
 //Get employees
 app.get("/employees", (req, res) => {
