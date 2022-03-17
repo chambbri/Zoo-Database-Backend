@@ -50,6 +50,7 @@ CREATE TABLE Animal_Services (
 
 /* CREATE ANIMAL_EMPLOYEE_SERVICES TABLE */
 CREATE TABLE Animal_Employee_Services (
+    aeservices_id INT(11) AUTO_INCREMENT UNIQUE NOT NULL,
     animal_services_id INT(11) NOT NULL,
     employee_id INT(11) NOT NULL,
     PRIMARY KEY (animal_services_id, employee_id),
