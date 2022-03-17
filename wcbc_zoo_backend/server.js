@@ -164,19 +164,19 @@ app.delete("/animalemployeeservices/:animal_services_id", (req, res)=> {
 })
 
 //Update an exhbit
-app.put("/exhibits/update", (req, res) => {
+app.put("/exhibits/:exhibit_id", (req, res) => {
   const exhibit_id = req.params.exhibit_id;
   const type = req.body.type;
   const size = req.body.size;
   const animal_capacity = req.body.animal_capacity;
   const updateExhibit = "UPDATE Exhibits SET type = ?, size = ?, animal_capacity = ? WHERE exhibit_id = ?";
-  mysql.pool.query(updateExhibit, exhibit_id, (err, result) => {
+  mysql.pool.query(updateExhibit, [type, size, animal_capacity, exhibit_id], (err, result) => {
     console.log(err)
   })
 })
 
 //Update an animal
-app.put("/animals/update", (req, res) => {
+app.put("/animals/:animal_id", (req, res) => {
   const animal_id = req.params.animal_id;
   const exhibit_id = req.body.exhibit_id;
   const animal_type = req.body.animal_type;
@@ -184,13 +184,13 @@ app.put("/animals/update", (req, res) => {
   const birthdate = req.body.birthdate;
   const gender = req.body.gender;
   const updateAnimal = "UPDATE Animlas SET exhibit_id = ?, animal_type = ?, origin_country = ?, birthdate = ?, gender = ? WHERE animal_id = ?";
-  mysql.pool.query(updateAnimal, animal_id, (err, result) => {
+  mysql.pool.query(updateAnimal, [exhibit_id, animal_type, origin_country, birthdate, gender, animal_id], (err, result) => {
     console.log(err)
   })
 })
 
 //Update an employee
-app.put("/employees/update", (req, res) => {
+app.put("/employees/:employee_id", (req, res) => {
   const employee_id = req.params.employee_id;
   const fname = req.body.fname;
   const lname = req.body.lname;
@@ -198,29 +198,30 @@ app.put("/employees/update", (req, res) => {
   const email = req.body.email;
   const job_title = req.body.job_title;
   const updateEmployee = "UPDATE Employees SET fname = ?, lname = ?, phone = ?, email = ?, job_title = ? WHERE employee_id = ?";
-  mysql.pool.query(updateEmployee, employee_id, (err, result) => {
-    console.loupdate
+  mysql.pool.query(updateEmployee, [fname, lname, phone, email, job_title, employee_id], (err, result) => {
+    console.log(err)
   })
 })
 
 //Update an animal service
-app.put("/animalservices/update", (req, res) => {
+app.put("/animalservices/:animal_services_id", (req, res) => {
   const animal_services_id = req.params.animal_services_id;
   const animal_id = req.body.animal_id;
   const date = req.body.date;
   const time = req.body.time;
   const type_of_care = req.body.type_of_care;
   const updateAnimalService = "UPDATE Animal_Services SET animal_id = ?, date = ?, time = ?, type_of_care = ? WHERE animal_services_id = ?";
-  mysql.pool.query(updateAnimalService, animal_services_id, (err, result) => {
+  mysql.pool.query(updateAnimalService, [animal_id, date, time, type_of_care, animal_services_id], (err, result) => {
     console.log(err)
-update
+  })
+})
 
 //Delete an animal employee service
-app.put("/animalemployeeservices/update", (req, res) => {
+app.put("/animalemployeeservices/:animal_services_id", (req, res) => {
   const animal_services_id = req.params.animal_services_id;
   const employee_id = req.body.employee_id;
-  const updateAnimalEmployeeService = "UPDATE Animal_Employee_Services SET animal_services_id = ?, employee_id = ?WHERE animal_services_id = ?";
-  mysql.pool.query(updateAnimalEmployeeService, animal_services_id, (err, result) => {
+  const updateAnimalEmployeeService = "UPDATE Animal_Employee_Services SET animal_services_id = ?, employee_id = ? WHERE animal_services_id = ?";
+  mysql.pool.query(updateAnimalEmployeeService, [animal_services_id, employee_id, animal_services_id], (err, result) => {
     console.log(err)
   })
 })
