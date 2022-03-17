@@ -220,8 +220,9 @@ app.put("/animalservices/:animal_services_id", (req, res) => {
 app.put("/animalemployeeservices/:animal_services_id", (req, res) => {
   const animal_services_id = req.params.animal_services_id;
   const employee_id = req.body.employee_id;
+  const new_animal_services_id = req.body.animal_services_id
   const updateAnimalEmployeeService = "UPDATE Animal_Employee_Services SET animal_services_id = ?, employee_id = ? WHERE animal_services_id = ?";
-  mysql.pool.query(updateAnimalEmployeeService, [animal_services_id, employee_id, animal_services_id], (err, result) => {
+  mysql.pool.query(updateAnimalEmployeeService, [new_animal_services_id, employee_id, animal_services_id], (err, result) => {
     console.log(err)
   })
 })
