@@ -35,6 +35,14 @@ app.get("/animals", (req, res) => {
   });
 });
 
+//Search for an animal
+app.get("/animals/:animal_type", (req, res) => {
+  const selectAnimal = "SELECT animal_id, exhibit_id, animal_type, origin_country, birthdate, gender FROM Animals WHERE animal_type = ?"
+  mysql.pool.query(selectAnimal, (err, result) => {
+    res.send(result);
+  }
+})
+
 //Get employees
 app.get("/employees", (req, res) => {
   const selectEmployees = "SELECT employee_id, fname, lname, phone, email, job_title FROM Employees";
@@ -217,7 +225,7 @@ app.put("/animalservices/:animal_services_id", (req, res) => {
   })
 })
 
-//Delete an animal employee service
+//Update an animal employee service
 app.put("/animalemployeeservices/:animal_services_id/:employee_id", (req, res) => {
   const animal_services_id = req.params.animal_services_id;
   const employee_id = req.params.employee_id;
@@ -228,6 +236,7 @@ app.put("/animalemployeeservices/:animal_services_id/:employee_id", (req, res) =
     console.log(err)
   })
 })
+
 
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
