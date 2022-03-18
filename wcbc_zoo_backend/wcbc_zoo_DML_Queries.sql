@@ -18,7 +18,7 @@ WHERE animal_id = :animal_idInput;
 SELECT * FROM Animals;
 
 -- Search for animal by animal type
-SELECT * FROM Animals where animal_type = :animal_typeInput
+SELECT * FROM Animals where animal_type = :animal_typeInput;
 
 
 -- Query for adding a new exhibit
